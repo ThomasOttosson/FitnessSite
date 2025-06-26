@@ -1,0 +1,30 @@
+{# templates/components/section_subscribe_call_to_action.html #}
+{% load static %}
+<section class="section-padding" style="background-color: var(--primary-accent);"> {# Uses accent color as background #}
+    <div class="container text-center">
+        <h2 class="section-heading text-dark mb-3">SUBSCRIBE TODAY</h2>
+        <p class="section-subheading text-dark opacity-75">
+            Sign up and start putting your health first. Get guided training sessions for only $9.97 for the first week.
+        </p>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                {# This section has a registration-like form, mapping to your Register view #}
+                <form action="{% url 'register' %}" method="post" class="row g-3 justify-content-center">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        <input type="email" class="form-control form-control-lg" name="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control form-control-lg" name="username" placeholder="Choose a Username" required>
+                    </div>
+                    <div class="col-12">
+                        <input type="password" class="form-control form-control-lg" name="password" placeholder="Choose a Password" required>
+                    </div>
+                    <div class="col-auto mt-4">
+                        <button type="submit" class="custom-btn btn-lg" style="background-image: linear-gradient(90deg, var(--dark-text), var(--gradient-start)); color: var(--primary-accent);">Get Started</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,115 @@
+{% load static %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-custom-header py-2">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'images/fclogo.svg' %}" alt="Fitness Site Logo" style="height: 80px; margin-right: 10px;">
+            </a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end bg-dark d-lg-none" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Menu</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'exercise_plan_list' %}">Exercise Plans</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'nutrition_plan_list' %}">Nutrition Plans</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'product_list' %}">Products</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ user.username }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="offcanvasNavbarDropdown">
+                                    <li><a class="dropdown-item text-white" href="{% url 'profile' %}">Profile</a></li>
+                                    <li><a class="dropdown-item text-white" href="{% url 'cart_detail' %}">Cart</a></li>
+                                    <li><a class="dropdown-item text-white" href="{% url 'subscribed_dashboard' %}">Subscriber Dashboard</a></li>
+                                    <li><a class="dropdown-item text-white" href="{% url 'order_history' %}">Order History</a></li>
+                                    {% if user.is_staff %}
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item text-white" href="{% url 'staff_dashboard' %}">Staff Dashboard</a></li>
+                                        <li><a class="dropdown-item text-white" href="{% url 'admin:index' %}">Django Admin</a></li>
+                                    {% endif %}
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form method="post" action="{% url 'logout' %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="dropdown-item text-white">Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'register' %}">Register</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse d-none d-lg-flex" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'exercise_plan_list' %}">Exercise Plans</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'nutrition_plan_list' %}">Nutrition Plans</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'product_list' %}">Products</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownDesktop" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownDesktop">
+                                <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cart_detail' %}">Cart</a></li>
+                                <li><a class="dropdown-item" href="{% url 'subscribed_dashboard' %}">Subscriber Dashboard</a></li>
+                                <li><a class="dropdown-item" href="{% url 'order_history' %}">Order History</a></li>
+                                {% if user.is_staff %}
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{% url 'staff_dashboard' %}">Staff Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'admin:index' %}">Django Admin</a></li>
+                                {% endif %}
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form method="post" action="{% url 'logout' %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="dropdown-item text-white">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

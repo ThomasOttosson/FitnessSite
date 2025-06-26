@@ -1,0 +1,46 @@
+{# templates/components/section_featured_features.html #}
+{% load static %}
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-5">
+                <h2 class="section-heading mb-3">PUT YOUR HEALTH FIRST</h2>
+                <p class="section-subheading text-start">
+                    Make your health a priority and get the training that will help you do it. Improve your overall fitness or start creating your dream body with a collection of guided training sessions that work you out the way you want, when you want, where you want.
+                </p>
+                <a href="{% url 'register' %}" class="custom-btn">Get Started</a>
+            </div>
+            <div class="col-lg-7 mt-5 mt-lg-0">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card featured-card text-center">
+                            <img src="{% static 'images/feature_gain_muscles.webp' %}" class="card-img-top" alt="Gain Muscles">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">GAIN MUSCLES</h5>
+                                <p class="card-text text-muted small">Start seeing muscle definition now</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card featured-card text-center">
+                            <img src="{% static 'images/feature_lose_weight.webp' %}" class="card-img-top" alt="Lose Weight">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">LOSE WEIGHT</h5>
+                                <p class="card-text text-muted small">Trim fat and see your weight drop</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card featured-card text-center">
+                            <img src="{% static 'images/feature_build_stamina.webp' %}" class="card-img-top" alt="Build Stamina">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">BUILD STAMINA</h5>
+                                <p class="card-text text-muted small">Build endurance and increase your stamina</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

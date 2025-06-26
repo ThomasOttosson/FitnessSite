@@ -1,0 +1,40 @@
+{# templates/components/section_testimonials.html #}
+{% load static %}
+<section class="section-padding bg-light">
+    <div class="container text-center">
+        <h2 class="section-heading mb-3">WHAT OUR CLIENTS SAY</h2>
+        <p class="section-subheading">
+            Hear from our satisfied members who have transformed their lives with Fitness Site.
+        </p>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="testimonial-card mx-auto" style="max-width: 700px;">
+                        <p>"Fitness Site has truly changed my life! The personalized exercise plans are fantastic, and I've seen amazing results. Highly recommended!"</p>
+                        <div class="author">- Jane Doe, Certified User</div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card mx-auto" style="max-width: 700px;">
+                        <p>"The nutrition plans are easy to follow and incredibly effective. I love the flexibility and the constant support. My energy levels are through the roof!"</p>
+                        <div class="author">- John Smith, Happy Subscriber</div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card mx-auto" style="max-width: 700px;">
+                        <p>"Finally, a platform that understands my needs! The variety of workouts and the quality of products are unmatched. I'm stronger and healthier than ever."</p>
+                        <div class="author">- Emily White, Fitness Enthusiast</div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>

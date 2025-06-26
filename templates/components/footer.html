@@ -1,0 +1,60 @@
+{% load static %}
+<footer class="py-5 bg-custom-footer text-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <a class="navbar-brand d-inline-flex align-items-center mb-3" href="{% url 'home' %}">
+                    <img src="{% static 'images/fclogo.svg' %}" alt="Fitness Site Logo" style="height: 50px; margin-right: 10px;">
+                </a>
+                <p class="text-body-secondary ">Your ultimate partner in achieving fitness goals with personalized plans, expert guidance, and top-quality products.</p>
+                <p class="text-body-secondary  mb-0">&copy; 2025 Fitness Site. All rights reserved.</p>
+            </div>
+
+            <div class="col-md-4 mb-4 mb-md-0">
+                <h5 class="mb-3 text-dark">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'home' %}" class="text-body-secondary text-decoration-none hover-accent">Home</a></li>
+                    <li><a href="{% url 'exercise_plan_list' %}" class="text-body-secondary text-decoration-none hover-accent">Exercise Plans</a></li>
+                    <li><a href="{% url 'nutrition_plan_list' %}" class="text-body-secondary text-decoration-none hover-accent">Nutrition Plans</a></li>
+                    <li><a href="{% url 'product_list' %}" class="text-body-secondary text-decoration-none hover-accent">Products</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'profile' %}" class="text-body-secondary text-decoration-none hover-accent">My Profile</a></li>
+                        <li><a href="{% url 'cart_detail' %}" class="text-body-secondary text-decoration-none hover-accent">My Cart</a></li>
+                        <li><a href="{% url 'order_history' %}" class="text-body-secondary text-decoration-none hover-accent">Order History</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}" class="text-body-secondary text-decoration-none hover-accent">Login</a></li>
+                        <li><a href="{% url 'register' %}" class="text-body-secondary text-decoration-none hover-accent">Register</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="col-md-4">
+                <h5 class="mb-3 text-dark">Stay Connected</h5>
+                <p class="text-body-secondary ">Join our newsletter for the latest updates and exclusive offers:</p>
+                <form action="{% url 'newsletter_signup' %}" method="post" class="d-flex flex-column mb-4">
+                    {% csrf_token %}
+                    <div class="input-group mb-2">
+                        <input type="email" name="email" class="form-control" placeholder="Your email address" aria-label="Your email address" required>
+                    </div>
+                    <button type="submit" class="custom-btn w-100">Subscribe</button>
+                </form>
+
+                <div class="d-flex justify-content-center justify-content-md-start mt-3">
+                    <a href="#" class="text-body-secondary mx-2 fs-4 hover-accent"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-body-secondary mx-2 fs-4 hover-accent"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-body-secondary mx-2 fs-4 hover-accent"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-body-secondary mx-2 fs-4 hover-accent"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 pt-4 border-top border-secondary-subtle opacity-50">
+            <div class="col-12 text-center text-body-secondary ">
+                <p class="mb-0">
+                    <a href="#" class="text-decoration-none text-body-secondary me-3 hover-accent">Privacy Policy</a>
+                    <a href="#" class="text-decoration-none text-body-secondary hover-accent">Terms of Service</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,49 @@
+{# templates/public-pages/nutrition_plan_list.html #}
+{% extends 'base.html' %}
+{% block title %}Nutrition Plans - Fitness Site{% endblock %}
+{% block meta_description %}Explore our expert-designed nutrition plans for weight loss, muscle gain, and healthy eating. Find a diet and meal plan tailored to your health objectives.{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container my-5">
+    <h1 class="section-heading text-center mb-5">Our Nutrition Plans</h1>
+
+    <div class="row g-4 justify-content-center">
+        {% for plan in plans %}
+        <div class="col-lg-4 col-md-6">
+            <div class="card featured-card h-100">
+                <img src="{% if plan.image %}{{ plan.image.url }}{% else %}{% static 'images/plan_placeholder.jpg' %}{% endif %}" class="card-img-top" alt="{{ plan.title }}">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold">{{ plan.title }}</h5>
+                    <p class="card-text text-muted">{{ plan.description|truncatechars:100 }}</p>
+
+                    {# Product Rating #}
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="star-rating me-2">
+                            {% with rating=plan.average_rating|floatformat:"0" %}
+                                {% for i in 5|ljust:5 %}
+                                    {% if forloop.counter <= rating %}
+                                        <i class="fas fa-star"></i>
+                                    {% else %}
+                                        <i class="far fa-star star-rating-empty"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endwith %}
+                        </div>
+                        <span class="review-count-text">({{ plan.review_count }} Reviews)</span>
+                    </div>
+
+                    <p class="card-text fw-bold fs-5 mt-auto">${{ plan.price|floatformat:2 }}</p>
+                    <a href="{% url 'nutrition_plan_detail' plan.id %}" class="custom-btn btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <p class="lead text-muted">No nutrition plans available at the moment.</p>
+            <a href="{% url 'home' %}" class="btn btn-primary mt-3">Go Home</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{# templates/components/section_hero.html #}
+{% load static %}
+<section class="hero-section">
+    <div class="container text-center">
+        <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInUp">NOW THERE'S NO EXCUSE.<br>GET FIT ON SITE.</h1>
+        <p class="lead mb-5 animate__animated animate__fadeInUp animate__delay-0-5s">
+            Can't get to the gym? Don't let that stop you from meeting your fitness goals. Fitness Site offers guided training that helps you get fit wherever you are. From zero equipment options to gym machine sessions, Fitness Site is your on-site trainer.
+        </p>
+        <div class="d-flex justify-content-center gap-3 animate__animated animate__fadeInUp animate__delay-1s">
+            <a href="{% url 'register' %}" class="custom-btn">Get Started</a>
+            <a href="{% url 'profile' %}" class="custom-btn btn-outline-dark">My Account</a>
+        </div>
+    </div>
+</section>

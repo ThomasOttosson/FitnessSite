@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Home - Fitness Site{% endblock %}
+{% block meta_description %}Welcome to Fitness Site! Discover personalized exercise plans, effective nutrition programs, and high-quality fitness products to achieve your health and wellness goals.{% endblock %}
+
+{% block content %}
+    {% include 'components/section_hero.html' %}
+    {% include 'components/section_featured_features.html' %}
+    {% include 'components/section_featured_products.html' %}
+    {% include 'components/section_featured_exercise_plans.html' %} 
+    {% include 'components/section_featured_nutrition_plans.html' %} 
+    {% include 'components/section_gym_anywhere.html' %}
+    {% include 'components/section_subscribe_call_to_action.html' %}
+    {% include 'components/section_testimonials.html' %}
+    {% include 'components/section_contact.html' %}
+{% endblock %}

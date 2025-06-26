@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ plan.title }} Content{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="mb-3">{{ plan.title }} - Exclusive Content!</h2>
+            <p class="lead">Congratulations! You have an active subscription to this plan.</p>
+            <hr>
+            <h4>Your Exercise Routines:</h4>
+            <ul>
+                <li>Warm-up (5 min)</li>
+                <li>Workout A: Full Body (e.g., Squats, Push-ups, Rows)</li>
+                <li>Workout B: Upper Body (e.g., Bench Press, Overhead Press)</li>
+                <li>Workout C: Lower Body & Core (e.g., Deadlifts, Lunges, Planks)</li>
+                <li>Cool-down (5 min)</li>
+            </ul>
+            <p>
+                <small>This content is only visible to subscribers of this specific plan.</small>
+            </p>
+            <a href="{% url 'subscribed_dashboard' %}" class="btn btn-primary mt-3">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

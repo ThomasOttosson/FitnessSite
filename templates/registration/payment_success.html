@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Payment Status{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+            {% if status == 'success' %}
+                <h2 class="text-success mb-4">Payment Successful! 🎉</h2>
+                <p>Thank you for your purchase. Your order has been placed successfully.</p>
+                <p>You will receive an email confirmation shortly.</p>
+                <a href="{% url 'home' %}" class="btn btn-primary mt-3">Continue Shopping</a>
+            {% elif status == 'pending' %}
+                <h2 class="text-warning mb-4">Payment Processing...</h2>
+                <p>Your payment is currently being processed or requires further action (e.g., 3D Secure). Please check back later.</p>
+                <a href="{% url 'home' %}" class="btn btn-primary mt-3">Return to Home</a>
+            {% else %}
+                <h2 class="text-danger mb-4">Payment Failed! 😔</h2>
+                <p>Unfortunately, your payment could not be processed. Please try again or contact support.</p>
+                <a href="{% url 'checkout' %}" class="btn btn-warning mt-3">Try Again</a>
+                <a href="{% url 'cart_detail' %}" class="btn btn-secondary mt-3">View Cart</a>
+            {% endif %}
+
+            {% if messages %}
+                <ul class="messages list-unstyled mt-4">
+                    {% for message in messages %}
+                    <li class="{{ message.tags }} alert alert-info">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="mb-4">Checkout</h2>
+
+            {% if messages %}
+                <ul class="messages list-unstyled">
+                    {% for message in messages %}
+                    <li class="{{ message.tags }} alert alert-info">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if cart and cart.items.all %}
+                <h4>Order Summary</h4>
+                <table class="table table-bordered mb-4">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart.items.all %}
+                            <tr>
+                                <td>
+                                    {% if item.exercise_plan %}
+                                        {{ item.exercise_plan.title }}
+                                    {% elif item.nutrition_plan %}
+                                        {{ item.nutrition_plan.title }}
+                                    {% elif item.product %}
+                                        {{ item.product.name }}
+                                    {% endif %}
+                                </td>
+                                <td>{{ item.quantity }}</td>
+                                <td>${{ item.price_at_addition|floatformat:2 }}</td>
+                                <td>${{ item.get_total|floatformat:2 }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right"><strong>Subtotal:</strong></td>
+                            <td><strong>${{ cart.get_total_cost|floatformat:2 }}</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <h4>Payment Details</h4>
+                <form id="payment-form">
+                    <div id="payment-element-container" class="mb-3">
+                        <!-- Stripe's Payment Element will be inserted here -->
+                    </div>
+                    <button id="submit-button" class="btn btn-success btn-lg btn-block mt-3">Pay Now</button>
+                    <div id="payment-message" class="hidden mt-3 text-danger"></div>
+                </form>
+
+            {% else %}
+                <p>Your cart is empty. Please add items before checking out.</p>
+                <a href="{% url 'home' %}" class="btn btn-primary">Continue Shopping</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Stripe.js v3 Integration -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    const stripe = Stripe('{{ stripe_publishable_key }}');
+    const clientSecret = '{{ client_secret }}'; // Get client_secret from Django context
+
+    const elements = stripe.elements({ clientSecret });
+    const paymentElement = elements.create('payment');
+    paymentElement.mount('#payment-element-container');
+
+    const form = document.getElementById('payment-form');
+    const submitButton = document.getElementById('submit-button');
+    const paymentMessage = document.getElementById('payment-message');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        submitButton.disabled = true; // Disable button to prevent multiple submissions
+
+        const { error } = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+                // Return URL where the customer will be redirected after completing the payment
+                return_url: window.location.origin + '/payment-success/', // Create this URL next!
+            },
+        });
+
+        if (error) {
+            if (error.type === "card_error" || error.type === "validation_error") {
+                paymentMessage.textContent = error.message;
+            } else {
+                paymentMessage.textContent = "An unexpected error occurred.";
+            }
+            paymentMessage.classList.remove('hidden');
+            submitButton.disabled = false;
+        } else {
+            // Payment succeeded or is processing. Stripe handles redirection via return_url.
+            // No explicit success message here, as user is redirected.
+        }
+    });
+</script>
+
+{% endblock %}

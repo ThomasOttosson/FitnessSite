@@ -1,0 +1,17 @@
+{% load static %}
+<section class="section-padding">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 order-lg-2"> {# Image on right for large screens #}
+                <img src="{% static 'images/gym_anywhere.webp' %}" alt="Make Your Gym Anywhere" class="img-fluid shadow-lg rounded-3 gym-anywhere">
+            </div>
+            <div class="col-lg-6 order-lg-1 text-center text-lg-start">
+                <h2 class="section-heading mb-3">MAKE YOUR GYM ANYWHERE</h2>
+                <p class="section-subheading text-start">
+                    Never leave the comfort of your own Home, Workout When you're on the Go or Get the added push you need at the gym. Fitness Site is trainer that goes with you anywhere and uses the equipment you have (or don't have) at your disposal.
+                </p>
+                <a href="{% url 'exercise_plan_list' %}" class="custom-btn">Get Started</a>
+            </div>
+        </div>
+    </div>
+</section>

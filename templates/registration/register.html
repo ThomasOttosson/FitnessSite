@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Register - Fitness Site{% endblock %}
+{% block meta_description %}Create a new account on Fitness Site to get started with personalized exercise plans, nutrition guidance, and premium fitness products.{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-custom-header py-3">
+                    <h2 class="mb-0 text-center text-dark">Join Fitness Site!</h2>
+                </div>
+                <div class="card-body p-4">
+                    <p class="lead text-center text-muted mb-4">Create your new account</p>
+
+                    {% if messages %}
+                        <div class="mb-4">
+                            {% for message in messages %}
+                                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        {% for field in form %}
+                            <div class="form-floating mb-3">
+                                {{ field }}
+                                <label for="{{ field.id_for_label }}" class="text-muted">{{ field.label }}</label>
+                                {% if field.help_text %}
+                                    <div class="form-text text-muted">{{ field.help_text }}</div>
+                                {% endif %}
+                                {% for error in field.errors %}
+                                    <div class="invalid-feedback d-block">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                        
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="custom-btn custom-btn-lg">Register</button>
+                        </div>
+                    </form>
+
+                    <p class="text-center mt-4 mb-0 text-muted">
+                        Already have an account? <a href="{% url 'login' %}" class="text-decoration-none hover-accent text-primary fw-semibold">Login here</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

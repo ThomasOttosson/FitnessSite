@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ plan.title }} Content{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="mb-3">{{ plan.title }} - Exclusive Content!</h2>
+            <p class="lead">Congratulations! You have an active subscription to this plan.</p>
+            <hr>
+            <h4>Your Nutrition Guidelines:</h4>
+            <ul>
+                <li>Meal Plan: Day 1 (Breakfast, Lunch, Dinner, Snacks)</li>
+                <li>Meal Plan: Day 2</li>
+                <li>Hydration Guide</li>
+                <li>Grocery List Template</li>
+                <li>Recipe Ideas</li>
+            </ul>
+            <p>
+                <small>This content is only visible to subscribers of this specific plan.</small>
+            </p>
+            <a href="{% url 'subscribed_dashboard' %}" class="btn btn-primary mt-3">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
